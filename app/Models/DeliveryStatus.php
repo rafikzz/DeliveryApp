@@ -13,6 +13,6 @@ class DeliveryStatus extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-
+  public $timestamps = false;
 
 }

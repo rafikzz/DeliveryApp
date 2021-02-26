@@ -16,10 +16,13 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onEdit('cascade');
             $table->string('delivery_address');
             $table->integer('quantity');
-            $table->unsignedBigInteger('unit_id');
-            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade')->onEdit('cascade');
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->foreign('status_id')->references('id')->on('delivery_statuses')->onDelete('cascade')->onEdit('cascade');
             $table->timestamps();
         });
     }

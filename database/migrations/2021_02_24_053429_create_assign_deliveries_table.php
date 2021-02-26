@@ -16,8 +16,12 @@ class CreateAssignDeliveriesTable extends Migration
         Schema::create('assign_deliveries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('delivery_id');
-            $table->unsignedBigInteger('driver_id');
-            $table->unsignedBigInteger('vehicle_id');
+            $table->foreign('delivery_id')->references('id')->on('deliveries')->onDelete('cascade')->onEdit('cascade');
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('cascade')->onEdit('cascade');
+            $table->unsignedBigInteger('vehicle_id')->nullable();
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade')->onEdit('cascade');
+
             $table->timestamps();
         });
     }
