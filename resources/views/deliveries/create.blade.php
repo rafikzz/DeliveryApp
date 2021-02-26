@@ -49,10 +49,10 @@
                           <div class="card-body pb-3 ">
                             <div class="pb-3">
                                 <a h></a>
-                            <a class="btn btn-success mr-3" onclick="existingCustomer() ">Existing Customer</a>
-                            <a class="btn btn-warning" onclick="newCustomer()">New Customer</a>
+                            <a class="btn btn-success mr-3" id="existing" onclick="existingCustomer() ">Existing Customer</a>
+                            <a class="btn btn-warning" id="new" onclick="newCustomer()">New Customer</a>
                             </div>
-                                <div class="form-group col-6" id="oldCustomer">
+                                <div class="form-group col-6" id="existingCustomer">
                                     <label for="Customer">Choose Customer </label>
                                     <div class="select">
                                     <select name="customer_id" id="customer1">
@@ -64,31 +64,31 @@
 
                                   </div>
 
-                                  <div class="form-group col-6" id="newCustomer" style="display: none">
+                                  <div class="form-group col-6 " id="newCustomer" style="display: none">
                                     <div class="row">
                                         <h3>New Customer Details    </h3>
                                         <div class="col-12 d-flex">
                                         <div class="form-group col-6">
                                             <label for="first_nae">First Name</label>
-                                            <input type="text" class="form-control" disabled="true" id="fn"  name="first_name" placeholder="Enter Your First Name" required>
+                                            <input type="text" class="form-control new" disabled="true"  name="first_name" placeholder="Enter Your First Name" required>
                                           </div>
                                         <div class="form-group col-6">
                                             <label for="last_name">Last Name</label>
-                                            <input type="text" class="form-control" disabled="true" id="ln" name="last_name" placeholder="Enter Your Last Name" required>
+                                            <input type="text" class="form-control new" disabled="true"  name="last_name" placeholder="Enter Your Last Name" required>
                                           </div>
                                           <div class="form-group col-6">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" disabled="true" id="email" name="email" placeholder="Enter Your Email" required>
+                                            <input type="text" class="form-control new" disabled="true"   name="email" placeholder="Enter Your Email" required>
                                           </div>
                                           <div class="form-group col-6">
                                             <label for="address">Address </label>
-                                            <input type="text" class="form-control" disabled="true" id="address" name="address" placeholder="Enter Your Address" required>
+                                            <input type="text" class="form-control new" disabled="true"   name="address" placeholder="Enter Your Address" required>
                                           </div>
 
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="contact_no">Contact No </label>
-                                            <input type="text" class="form-control" disabled="true" id="contact_no" name="contact_no" placeholder="Enter Your Address" required>
+                                            <input type="text" class="form-control new" disabled="true" class="new"  name="contact_no" placeholder="Enter Your Address" required>
                                           </div>
                                       </div>
                                     </div>
@@ -102,7 +102,7 @@
 
                                   <div class="col pb-3">
                                     <label for="unitId">Choose Quantity </label>
-                                    <input type="number" name="quantity">
+                                    <input type="number" min="1" name="quantity">
                                     <div class="select">
                                         <select name="unit_id" id="unit_id">
                                             @foreach ($units as $unit)
@@ -130,36 +130,21 @@
     </section>
 </div>
 <script type="text/javascript">
-    function existingCustomer(){
+$(document).ready(function(){
+  $("#existing").click(function(){
+    $('#existingCustomer').show();
+    $('#newCustomer').hide();
+    $('.new').prop("disabled",true);
+    $('#customer1').prop("disabled",false);
+  });
+  $("#new").click(function(){
+    $('#existingCustomer').hide();
+    $('#newCustomer').show();
+    $('.new').prop("disabled",false);
+    $('#customer1').prop("disabled",true);
+  });
+});
 
-        const btn= document.getElementById('customer1');
-        btn.disabled =false;
-        const divOld=document.getElementById('oldCustomer');
-        divOld.style.display = "block";
-        const divNew=document.getElementById('newCustomer');
-        divNew.style.display = "none";
-        document.getElementById('fn').disabled =true;
-        document.getElementById('ln').disabled =true;
-        document.getElementById('email').disabled =true;
-        document.getElementById('address').disabled =true;
-        document.getElementById('contact_no').disabled =true;
 
-
-    }
-
-    function newCustomer(){
-        const btn= document.getElementById('customer1');
-        btn.disabled =true;
-        const divOld=document.getElementById('oldCustomer');
-        divOld.style.display = "none";
-        const divNew=document.getElementById('newCustomer');
-        divNew.style.display = "block";
-
-        document.getElementById('fn').disabled =false;
-        document.getElementById('ln').disabled =false;
-        document.getElementById('email').disabled =false;
-        document.getElementById('address').disabled =false;
-        document.getElementById('contact_no').disabled =false;
-    }
 </script>
 @endsection

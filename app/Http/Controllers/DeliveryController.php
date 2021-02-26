@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDeliveryRequest;
 use App\Models\Customer;
 use App\Models\Delivery;
 use App\Models\DeliveryStatus;
@@ -20,6 +21,7 @@ class DeliveryController extends Controller
     public function index()
     {
         $deliveries = Delivery::latest()->get();
+
         return view('deliveries.index',compact('deliveries'))->with('i','0');
     }
 
@@ -42,9 +44,9 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDeliveryRequest $request)
     {
-        $data = $this->dataValidate();
+        $data = $request->validated();
 
 
         if($request['customer_id']){

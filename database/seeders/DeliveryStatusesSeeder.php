@@ -16,13 +16,13 @@ class DeliveryStatusesSeeder extends Seeder
     {
         DeliveryStatus::create([
         	'name' => 'pending',
-        	'color' => '#FFFF6'
+        	'color' => '#FFFF64'
 
 
         ]);
         DeliveryStatus::create([
         	'name' => 'delivered',
-        	'color' => '#90EE9'
+        	'color' => '#90EE99'
 
 
         ]);
@@ -34,7 +34,7 @@ class DeliveryStatusesSeeder extends Seeder
         ]);
         DeliveryStatus::create([
         	'name' => 'assigned',
-        	'color' => '#72bcd'
+        	'color' => '#72bcd7'
 
 
         ]);

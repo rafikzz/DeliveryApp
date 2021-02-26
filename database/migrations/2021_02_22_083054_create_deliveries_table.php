@@ -20,9 +20,9 @@ class CreateDeliveriesTable extends Migration
             $table->string('delivery_address');
             $table->integer('quantity');
             $table->unsignedBigInteger('unit_id')->nullable();
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade')->onEdit('cascade');
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->unsignedBigInteger('status_id')->nullable();
-            $table->foreign('status_id')->references('id')->on('delivery_statuses')->onDelete('cascade')->onEdit('cascade');
+            $table->foreign('status_id')->references('id')->on('delivery_statuses');
             $table->timestamps();
         });
     }

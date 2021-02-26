@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDriverRequest;
+use App\Http\Requests\UpdateDriverRequest;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 use DataTables;
@@ -37,11 +39,11 @@ class DriverController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDriverRequest $request)
     {
 
 
-      Driver::create($this->driverCreateValidate());
+      Driver::create($request->validated());
       return redirect()->route('drivers.index')->with('sucess','Driver has been created');
 
     }
@@ -76,10 +78,10 @@ class DriverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Driver $driver)
+    public function update(UpdateDriverRequest $request, Driver $driver)
     {
 
-        $driver->update($this->driverEditValidate());
+        $driver->update($request->validated());
         return redirect()->route('drivers.index')->with('sucess','Driver has been created');
     }
 
@@ -96,29 +98,7 @@ class DriverController extends Controller
 
         return redirect()->route('drivers.index')->with('success','Driver deleted successfully');
     }
-    public function driverCreateValidate()
-    {
-            return request()->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email'=>'required|email|unique:drivers',
-            'contact_no' => 'required',
-            'address' => 'required',
 
-
-        ]);
-    }
-    public function driverEditValidate()
-    {
-            return request()->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'contact_no' => 'required',
-            'address' => 'required',
-
-
-        ]);
-    }
 
 
 }
